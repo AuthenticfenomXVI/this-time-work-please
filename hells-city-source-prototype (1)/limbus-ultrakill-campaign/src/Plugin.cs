@@ -20,6 +20,7 @@ namespace HellsCity
         private readonly List<string> _missions = new List<string>();
         private int _missionIndex;
         private string _status = "Starting diagnostics…";
+        private GameObject _testLevelRoot;
 
         private void Awake()
         {
@@ -35,15 +36,17 @@ namespace HellsCity
             LoadMissionNames();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F8)) _visible = !_visible;
-            if (Input.GetKeyDown(KeyCode.LeftBracket) && _missions.Count > 0)
-                _missionIndex = (_missionIndex + _missions.Count - 1) % _missions.Count;
-            if (Input.GetKeyDown(KeyCode.RightBracket) && _missions.Count > 0)
-                _missionIndex = (_missionIndex + 1) % _missions.Count;
-        }
+private void Update()
+{
+    if (Input.GetKeyDown(KeyCode.F8)) _visible = !_visible;
+    if (Input.GetKeyDown(KeyCode.F9)) BuildGreyboxTestLevel();
+    if (Input.GetKeyDown(KeyCode.F10)) RemoveGreyboxTestLevel();
 
+    if (Input.GetKeyDown(KeyCode.LeftBracket) && _missions.Count > 0)
+        _missionIndex = (_missionIndex + _missions.Count - 1) % _missions.Count;
+    if (Input.GetKeyDown(KeyCode.RightBracket) && _missions.Count > 0)
+        _missionIndex = (_missionIndex + 1) % _missions.Count;
+}
         private void LoadMissionNames()
         {
             // Read mission names from the data sheet when packaged beside the plugin.
@@ -96,16 +99,128 @@ namespace HellsCity
             }
         }
 
+private void BuildGreyboxTestLevel()
+{
+    RemoveGreyboxTestLevel();
+
+    var cam = Camera.main;
+    if (cam == null)
+    {
+        _status = "No main camera found.";
+        Logger.LogWarning(_status);
+        return;
+    }
+
+    var forward = cam.transform.forward;
+    forward.y = 0f;
+
+    if (forward.sqrMagnitude < 0.01f)
+        forward = Vector3.forward;
+
+    forward.Normalize();
+
+    var origin = cam.transform.position + forward * 10f;
+    origin.y = cam.transform.position.y - 2f;
+
+    _testLevelRoot = new GameObject("HellsCity_GreyboxTestLevel");
+    _testLevelRoot.transform.position = origin;
+    _testLevelRoot.transform.rotation =
+        Quaternion.LookRotation(forward, Vector3.up);
+
+    // Starting platform
+    MakeBlock("Start Platform",
+        new Vector3(0f, -0.5f, 0f),
+        new Vector3(12f, 1f, 10f),
+        new Color(0.25f, 0.25f, 0.3f));
+
+    // Alley floor
+    MakeBlock("Alley Floor",
+        new Vector3(0f, -0.5f, 15f),
+        new Vector3(7f, 1f, 24f),
+        new Color(0.32f, 0.25f, 0.25f));
+
+    // Alley walls
+    MakeBlock("Left Wall",
+        new Vector3(-4f, 2f, 15f),
+        new Vector3(1f, 5f, 24f),
+        new Color(0.18f, 0.18f, 0.2f));
+
+    MakeBlock("Right Wall",
+        new Vector3(4f, 2f, 15f),
+        new Vector3(1f, 5f, 24f),
+        new Color(0.18f, 0.18f, 0.2f));
+
+    // Open arena
+    MakeBlock("Arena Floor",
+        new Vector3(0f, -0.5f, 37f),
+        new Vector3(22f, 1f, 16f),
+        new Color(0.22f, 0.22f, 0.25f));
+
+    // Ruined structures
+    MakeBlock("Broken Column",
+        new Vector3(-8f, 1.5f, 38f),
+        new Vector3(2f, 4f, 5f),
+        new Color(0.28f, 0.24f, 0.22f));
+
+    MakeBlock("Collapsed Wall",
+        new Vector3(8f, 1f, 34f),
+        new Vector3(2f, 3f, 6f),
+        new Color(0.28f, 0.24f, 0.22f));
+
+    // Red exit marker
+    MakeBlock("Exit Marker",
+        new Vector3(0f, 1.5f, 44f),
+        new Vector3(3f, 3f, 0.5f),
+        new Color(0.8f, 0.05f, 0.05f));
+
+    _status = "Greybox created. Press F10 to remove it.";
+    Logger.LogInfo(_status);
+}
+
+private void MakeBlock(
+    string blockName,
+    Vector3 localPosition,
+    Vector3 localScale,
+    Color color)
+{
+    var block = GameObject.CreatePrimitive(PrimitiveType.Cube);
+    block.name = blockName;
+    block.transform.SetParent(_testLevelRoot.transform, false);
+    block.transform.localPosition = localPosition;
+    block.transform.localScale = localScale;
+
+    var renderer = block.GetComponent<Renderer>();
+    if (renderer != null)
+    {
+        var shader = Shader.Find("Standard");
+        if (shader != null)
+        {
+            var material = new Material(shader);
+            material.color = color;
+            renderer.material = material;
+        }
+    }
+}
+
+private void RemoveGreyboxTestLevel()
+{
+    if (_testLevelRoot == null) return;
+
+    Destroy(_testLevelRoot);
+    _testLevelRoot = null;
+    _status = "Temporary greybox removed.";
+}
         private void OnGUI()
         {
             if (!_visible) return;
-            GUI.Box(new Rect(18, 18, 520, 240), "HELL'S CITY — CAMPAIGN PROTOTYPE");
+            GUI.Box(new Rect(18, 18, 520, 264), "HELL'S CITY — CAMPAIGN PROTOTYPE");
             GUI.Label(new Rect(34, 48, 485, 24), "F8: hide/show  |  [ and ]: browse planned missions");
             GUI.Label(new Rect(34, 78, 485, 24), _missions.Count == 0 ? "No campaign sheet loaded." : _missions[_missionIndex]);
             GUI.Label(new Rect(34, 108, 485, 42), "Limbus: " + (string.IsNullOrEmpty(_limbusPath) ? "not detected" : "detected locally"));
             GUI.Label(new Rect(34, 150, 485, 42), "Asset candidates: " + _assetCandidates.Count + " (inventory only; compatibility not verified)");
             GUI.Label(new Rect(34, 188, 485, 42), "STATUS: " + _status);
-            GUI.Label(new Rect(34, 218, 485, 24), "Prototype only: no new levels, enemies, or boss behavior yet.");
+            GUI.Label(new Rect(34, 218, 485, 24), "F9: create test level | F10: remove it");
+            GUI.Label(new Rect(34, 242, 485, 24), "Greybox only; no enemies or mission transitions.");
         }
     }
 
