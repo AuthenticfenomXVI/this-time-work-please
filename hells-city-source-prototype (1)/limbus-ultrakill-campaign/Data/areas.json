@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "status": "design-sheet; scenes not implemented",
+  "areas": [
+    {
+      "id": "backstreets_01",
+      "name": "Backstreets: Blood-Red Welcome",
+      "environment": "tight alleys, stacked housing, rain-slick signage",
+      "missionType": "combat-exploration",
+      "setpiece": "vertical alley arena",
+      "bossRef": "sinner_rival_01"
+    },
+    {
+      "id": "lc_branch_02",
+      "name": "Abandoned L Corp Branch",
+      "environment": "buried facility corridors, observation rooms, sealed doors",
+      "missionType": "exploration-arena",
+      "setpiece": "containment wing",
+      "bossRef": "abno_wayward_passenger_boss"
+    },
+    {
+      "id": "workshop_row_03",
+      "name": "Workshop Row",
+      "environment": "industrial workshops, scrap lifts, improvised barricades",
+      "missionType": "arena",
+      "setpiece": "multi-level foundry",
+      "bossRef": "sinner_rival_02"
+    },
+    {
+      "id": "wcorp_transit_04",
+      "name": "W Corp Transit Ruins",
+      "environment": "derelict platform, broken train cars, distorted transit signage",
+      "missionType": "combat-exploration",
+      "setpiece": "train-yard traversal",
+      "bossRef": "abno_drifting_fox_boss"
+    },
+    {
+      "id": "nest_perimeter_05",
+      "name": "The Nest Perimeter",
+      "environment": "clean facades over hostile service lanes and checkpoints",
+      "missionType": "combat",
+      "setpiece": "checkpoint-to-courtyard push",
+      "bossRef": "sinner_rival_03"
+    },
+    {
+      "id": "bough_vault_06",
+      "name": "The Golden Bough Vault",
+      "environment": "buried archive, strange growths, broken research equipment",
+      "missionType": "finale",
+      "setpiece": "multi-stage vault arena",
+      "bossRef": "abno_finale"
+    }
+  ]
+}

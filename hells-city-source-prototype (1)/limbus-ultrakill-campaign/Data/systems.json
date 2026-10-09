@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "systems": [
+    { "id": "campaign_index", "state": "prototype", "purpose": "mission ordering and campaign metadata", "source": "areas.json", "implemented": "overlay-only" },
+    { "id": "runtime_limbus_locator", "state": "prototype", "purpose": "find a local Steam install without shipping game files", "source": "plugin code", "implemented": true },
+    { "id": "asset_compatibility", "state": "blocked-on-inspection", "purpose": "determine whether real Limbus assets can be loaded in ULTRAKILL's Unity runtime", "source": "runtime game inspection", "implemented": false },
+    { "id": "level_loading", "state": "not-implemented", "purpose": "load City level scenes from a permitted asset pipeline", "source": "areas.json", "implemented": false },
+    { "id": "encounter_spawning", "state": "not-implemented", "purpose": "spawn enemies using verified ULTRAKILL hooks and player-owned Limbus assets", "source": "encounters.json", "implemented": false },
+    { "id": "boss_phases", "state": "not-implemented", "purpose": "boss phases, tells, checkpoints, and completion triggers", "source": "encounters.json", "implemented": false },
+    { "id": "one_click_boot", "state": "unverified", "purpose": "start from Melty using ULTRAKILL plus BepInEx 5", "source": "Melty recipe", "implemented": false }
+  ]
+}

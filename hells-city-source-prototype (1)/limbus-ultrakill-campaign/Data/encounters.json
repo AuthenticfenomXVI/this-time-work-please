@@ -1,0 +1,154 @@
+{
+  "schemaVersion": 1,
+  "status": "design-sheet; exact game prefabs and spawn hooks unverified",
+  "sinners": [
+    {
+      "id": "sinner_yi_sang",
+      "name": "Yi Sang",
+      "role": "rival-encounter",
+      "behavior": "mobile duelist with readable wind-up attacks",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "sinner_don_quixote",
+      "name": "Don Quixote",
+      "role": "rival-encounter",
+      "behavior": "high-mobility pursuit encounter",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "sinner_ryoshu",
+      "name": "Ryōshū",
+      "role": "elite-rival",
+      "behavior": "close-range pressure with clear telegraphs",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "sinner_heathcliff",
+      "name": "Heathcliff",
+      "role": "boss-rival",
+      "behavior": "aggressive pursuit and arena pressure",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "sinner_ishmael",
+      "name": "Ishmael",
+      "role": "boss-rival",
+      "behavior": "phase-based arena control",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "sinner_outis",
+      "name": "Outis",
+      "role": "elite-rival",
+      "behavior": "tactical positioning and supporting hazards",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "sinner_gregor",
+      "name": "Gregor",
+      "role": "elite-rival",
+      "behavior": "resilient close-range pressure",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    }
+  ],
+  "abnormalities": [
+    {
+      "id": "abno_wayward_passenger",
+      "name": "Wayward Passenger",
+      "role": "boss",
+      "arenaIdea": "transit-space distortion and route changes",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "abno_drifting_fox",
+      "name": "Drifting Fox",
+      "role": "boss",
+      "arenaIdea": "open sightlines and shifting safe zones",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "abno_skin_prophet",
+      "name": "Skin Prophet",
+      "role": "elite-or-boss",
+      "arenaIdea": "ritual space with escalating environmental pressure",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "abno_spiral_contempt",
+      "name": "Spiral of Contempt",
+      "role": "boss",
+      "arenaIdea": "telegraphed area denial and traversal",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    },
+    {
+      "id": "abno_siltcurrent",
+      "name": "Dream-Devouring Siltcurrent",
+      "role": "finale candidate",
+      "arenaIdea": "multi-stage arena with changing lanes",
+      "assetSource": "player Limbus install only",
+      "verified": false
+    }
+  ],
+  "bosses": [
+    {
+      "id": "sinner_rival_01",
+      "name": "Sinner rival: first contact",
+      "characterRef": "sinner_don_quixote",
+      "areaRef": "backstreets_01",
+      "phaseCount": 2,
+      "verified": false
+    },
+    {
+      "id": "sinner_rival_02",
+      "name": "Workshop enforcer",
+      "characterRef": "sinner_ryoshu",
+      "areaRef": "workshop_row_03",
+      "phaseCount": 2,
+      "verified": false
+    },
+    {
+      "id": "sinner_rival_03",
+      "name": "Nest perimeter duel",
+      "characterRef": "sinner_heathcliff",
+      "areaRef": "nest_perimeter_05",
+      "phaseCount": 3,
+      "verified": false
+    },
+    {
+      "id": "abno_finale",
+      "name": "The Vault's Hunger",
+      "characterRef": "abno_siltcurrent",
+      "areaRef": "bough_vault_06",
+      "phaseCount": 3,
+      "verified": false
+    },
+    {
+      "id": "abno_wayward_passenger_boss",
+      "name": "Wayward Passenger encounter",
+      "characterRef": "abno_wayward_passenger",
+      "areaRef": "lc_branch_02",
+      "phaseCount": 2,
+      "verified": false
+    },
+    {
+      "id": "abno_drifting_fox_boss",
+      "name": "Drifting Fox encounter",
+      "characterRef": "abno_drifting_fox",
+      "areaRef": "wcorp_transit_04",
+      "phaseCount": 2,
+      "verified": false
+    }
+  ]
+}
